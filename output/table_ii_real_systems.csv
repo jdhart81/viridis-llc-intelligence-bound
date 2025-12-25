@@ -1,0 +1,4 @@
+system,power_W,temperature_K,bandwidth_bits_s,D,data_bound,landauer_bound,headroom,limiting
+Human Brain,20,310,1000000000.0,0.001,1.000000e+06,6.741547e+21,6.741547e+15,DATA
+NVIDIA H100,700,350,24000000000000.0,0.03,7.200000e+11,2.089880e+23,2.902610e+11,DATA
+Theoretical Max,1000000.0,300,1000000000000000.0,0.5,5.000000e+14,3.483133e+26,6.966265e+11,DATA
