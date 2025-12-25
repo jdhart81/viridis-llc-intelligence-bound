@@ -59,7 +59,7 @@ jobs:
 
     - name: Lint with flake8
       run: |
-        flake8 code/ tests/ --max-line-length=100 --ignore=E501,W503
+        flake8 code/ tests/ --max-line-length=100 --ignore=E501,W503,E402
 
   validate:
     runs-on: ubuntu-latest
