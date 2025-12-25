@@ -6,7 +6,7 @@
 
 **Thermodynamic Limits on Learning Rate and Implications for Biosphere Information**
 
-This repository contains the paper, computational validation code, and supplementary materials for "The Intelligence Bound" by Justin Hart (Viridis LLC).
+This repository contains the computational validation code and supplementary materials for "The Intelligence Bound" by Justin Hart (Viridis LLC).
 
 ## Abstract
 
@@ -35,12 +35,9 @@ where:
 intelligence-bound/
 ├── README.md                 # This file
 ├── LICENSE                   # MIT License
+├── CONTRIBUTING.md           # Contribution guidelines
 ├── requirements.txt          # Python dependencies
 ├── setup.py                  # Package installation
-├── paper/
-│   ├── intelligence_bound_v11.tex    # LaTeX source
-│   ├── intelligence_bound_v11.pdf    # Compiled paper
-│   └── figures/                       # Paper figures
 ├── code/
 │   ├── __init__.py
 │   ├── intelligence_bound.py         # Core computations
@@ -53,6 +50,7 @@ intelligence-bound/
 │   └── test_simulations.py
 ├── data/
 │   └── README.md                     # Data sources documentation
+├── output/                   # Generated validation results
 └── notebooks/
     └── reproduce_results.ipynb       # Interactive reproduction
 ```
@@ -219,4 +217,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## Acknowledgments
 
-Computational validation code reproducing all numerical results in the paper is provided in this repository. The theoretical derivations are fully contained within the paper.
+Computational validation code reproducing all numerical results is provided in this repository. Run `python -m code.validation` to reproduce all tables and verify the mathematical claims.
