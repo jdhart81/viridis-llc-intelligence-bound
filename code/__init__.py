@@ -13,7 +13,7 @@ Main components:
 
 Example usage:
     from code import landauer_bound, intelligence_bound
-    
+
     # Calculate bounds
     I_max = landauer_bound(power=1.0, temperature=300)
     I_data = intelligence_bound(D=0.05, bandwidth=1e12, power=700, temperature=350)
@@ -50,7 +50,7 @@ __all__ = [
     "LN2",
     # Core bounds
     "landauer_bound",
-    "data_bound", 
+    "data_bound",
     "intelligence_bound",
     "system_analysis",
     # Estimators

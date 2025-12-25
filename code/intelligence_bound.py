@@ -29,19 +29,19 @@ LN2 = np.log(2)  # ≈ 0.693147
 @dataclass
 class SystemAnalysis:
     """Results of analyzing a physical learning system."""
-    
+
     name: str
     power: float  # W
     temperature: float  # K
     bandwidth: float  # bits/s
     D: float  # data richness ∈ [0, 1]
-    
+
     landauer_bound: float  # bits/s
     data_bound: float  # bits/s
     effective_bound: float  # bits/s (minimum)
     headroom: float  # ratio of Landauer to data bound
     limiting_factor: str  # "DATA" or "POWER"
-    
+
     def __str__(self) -> str:
         return (
             f"System Analysis: {self.name}\n"
@@ -63,31 +63,31 @@ class SystemAnalysis:
 def landauer_bound(power: float, temperature: float) -> float:
     """
     Calculate the Landauer (thermodynamic) bound on intelligence creation rate.
-    
+
     The Landauer bound arises from the minimum energy cost of erasing
     one bit of information: E_min = k_B T ln(2).
-    
+
     Parameters
     ----------
     power : float
         Available power in Watts [W]
     temperature : float
         Operating temperature in Kelvin [K]
-    
+
     Returns
     -------
     float
         Maximum intelligence creation rate [bits/s]
-    
+
     Examples
     --------
     >>> landauer_bound(power=1.0, temperature=300)
     3.48e+20
-    
+
     Notes
     -----
     The bound is: İ_max = P / (k_B T ln 2)
-    
+
     At room temperature (300 K), 1 Watt allows ~3.5×10²⁰ bit operations/s.
     This is an absolute ceiling that no physical computer can exceed.
     """
@@ -95,38 +95,38 @@ def landauer_bound(power: float, temperature: float) -> float:
         raise ValueError(f"Power must be non-negative, got {power}")
     if temperature <= 0:
         raise ValueError(f"Temperature must be positive, got {temperature}")
-    
+
     return power / (BOLTZMANN_CONSTANT * temperature * LN2)
 
 
 def data_bound(D: float, bandwidth: float) -> float:
     """
     Calculate the data (informational) bound on intelligence creation rate.
-    
+
     The data bound arises from the fact that you can only learn as fast
     as your environment provides learnable structure.
-    
+
     Parameters
     ----------
     D : float
         Data richness (predictive fraction) ∈ [0, 1]
     bandwidth : float
         Observation bandwidth in bits per second [bits/s]
-    
+
     Returns
     -------
     float
         Maximum intelligence creation rate [bits/s]
-    
+
     Examples
     --------
     >>> data_bound(D=0.05, bandwidth=1e12)
     5e+10
-    
+
     Notes
     -----
     The bound is: İ_max = D · B
-    
+
     D measures what fraction of observations contain predictive structure.
     Random noise has D ≈ 0; highly structured signals have D ≈ 1.
     """
@@ -134,23 +134,20 @@ def data_bound(D: float, bandwidth: float) -> float:
         raise ValueError(f"D must be in [0, 1], got {D}")
     if bandwidth < 0:
         raise ValueError(f"Bandwidth must be non-negative, got {bandwidth}")
-    
+
     return D * bandwidth
 
 
 def intelligence_bound(
-    D: float,
-    bandwidth: float,
-    power: float,
-    temperature: float
+    D: float, bandwidth: float, power: float, temperature: float
 ) -> Tuple[float, str]:
     """
     Calculate the Intelligence Bound (Theorem 1).
-    
+
     The Intelligence Bound is the minimum of the data bound and Landauer bound:
-    
+
         İ ≤ min(D · B, P / (k_B T ln 2))
-    
+
     Parameters
     ----------
     D : float
@@ -161,14 +158,14 @@ def intelligence_bound(
         Available power [W]
     temperature : float
         Operating temperature [K]
-    
+
     Returns
     -------
     bound : float
         Maximum intelligence creation rate [bits/s]
     limiting_factor : str
         "DATA" if data-limited, "POWER" if Landauer-limited
-    
+
     Examples
     --------
     >>> bound, limiting = intelligence_bound(D=0.05, bandwidth=1e12, power=700, temperature=350)
@@ -177,7 +174,7 @@ def intelligence_bound(
     """
     I_landauer = landauer_bound(power, temperature)
     I_data = data_bound(D, bandwidth)
-    
+
     if I_data <= I_landauer:
         return I_data, "DATA"
     else:
@@ -185,15 +182,11 @@ def intelligence_bound(
 
 
 def system_analysis(
-    name: str,
-    power: float,
-    temperature: float,
-    bandwidth: float,
-    D: float
+    name: str, power: float, temperature: float, bandwidth: float, D: float
 ) -> SystemAnalysis:
     """
     Perform complete analysis of a physical learning system.
-    
+
     Parameters
     ----------
     name : str
@@ -206,12 +199,12 @@ def system_analysis(
         Observation bandwidth [bits/s]
     D : float
         Data richness ∈ [0, 1]
-    
+
     Returns
     -------
     SystemAnalysis
         Dataclass containing all computed quantities
-    
+
     Examples
     --------
     >>> analysis = system_analysis(
@@ -226,8 +219,8 @@ def system_analysis(
     I_landauer = landauer_bound(power, temperature)
     I_data = data_bound(D, bandwidth)
     effective, limiting = intelligence_bound(D, bandwidth, power, temperature)
-    headroom = I_landauer / I_data if I_data > 0 else float('inf')
-    
+    headroom = I_landauer / I_data if I_data > 0 else float("inf")
+
     return SystemAnalysis(
         name=name,
         power=power,
@@ -238,19 +231,18 @@ def system_analysis(
         data_bound=I_data,
         effective_bound=effective,
         headroom=headroom,
-        limiting_factor=limiting
+        limiting_factor=limiting,
     )
 
 
 def temperature_scaling_table(
-    power: float = 1.0,
-    temperatures: Optional[list] = None
+    power: float = 1.0, temperatures: Optional[list] = None
 ) -> Dict[str, list]:
     """
     Generate Table I: Temperature scaling validation.
-    
+
     Demonstrates that İ_max × T = constant (Landauer prediction).
-    
+
     Parameters
     ----------
     power : float
@@ -258,7 +250,7 @@ def temperature_scaling_table(
     temperatures : list, optional
         List of temperatures in Kelvin
         Default: [4, 77, 300, 1000] (liquid He, liquid N₂, room temp, high)
-    
+
     Returns
     -------
     dict
@@ -266,62 +258,58 @@ def temperature_scaling_table(
     """
     if temperatures is None:
         temperatures = [4, 77, 300, 1000]
-    
-    results = {
-        "temperature_K": [],
-        "I_max_bits_per_s": [],
-        "I_max_times_T": []
-    }
-    
+
+    results = {"temperature_K": [], "I_max_bits_per_s": [], "I_max_times_T": []}
+
     for T in temperatures:
         I_max = landauer_bound(power, T)
         results["temperature_K"].append(T)
         results["I_max_bits_per_s"].append(I_max)
         results["I_max_times_T"].append(I_max * T)
-    
+
     return results
 
 
 def real_systems_table() -> Dict[str, SystemAnalysis]:
     """
     Generate Table II: Real system analysis.
-    
+
     Analyzes human brain, NVIDIA H100, and theoretical maximum.
-    
+
     Returns
     -------
     dict
         Dictionary mapping system name to SystemAnalysis
     """
     systems = {}
-    
+
     # Human Brain
     systems["Human Brain"] = system_analysis(
         name="Human Brain",
-        power=20,           # W (metabolic)
-        temperature=310,    # K (body temperature)
-        bandwidth=1e9,      # bits/s (sensory bandwidth)
-        D=1e-3              # Most sensory input is redundant
+        power=20,  # W (metabolic)
+        temperature=310,  # K (body temperature)
+        bandwidth=1e9,  # bits/s (sensory bandwidth)
+        D=1e-3,  # Most sensory input is redundant
     )
-    
+
     # NVIDIA H100
     systems["NVIDIA H100"] = system_analysis(
         name="NVIDIA H100",
-        power=700,          # W (TDP)
-        temperature=350,    # K (operating)
-        bandwidth=2.4e13,   # bits/s (3 TB/s = 3e12 bytes/s = 2.4e13 bits/s)
-        D=0.03              # D_text→world (text as channel for physical-world prediction)
+        power=700,  # W (TDP)
+        temperature=350,  # K (operating)
+        bandwidth=2.4e13,  # bits/s (3 TB/s = 3e12 bytes/s = 2.4e13 bits/s)
+        D=0.03,  # D_text→world (text as channel for physical-world prediction)
     )
-    
+
     # Theoretical Maximum (optimistic assumptions)
     systems["Theoretical Max"] = system_analysis(
         name="Theoretical Max",
-        power=1e6,          # W (1 MW data center)
-        temperature=300,    # K
-        bandwidth=1e15,     # bits/s (petabit/s)
-        D=0.5               # High-quality curated data
+        power=1e6,  # W (1 MW data center)
+        temperature=300,  # K
+        bandwidth=1e15,  # bits/s (petabit/s)
+        D=0.5,  # High-quality curated data
     )
-    
+
     return systems
 
 
@@ -329,10 +317,10 @@ def critical_power(D: float, bandwidth: float, temperature: float) -> float:
     """
     Calculate the critical power P* at which the system transitions
     from data-limited to power-limited regime.
-    
+
     At P = P*, the data bound equals the Landauer bound:
         D · B = P* / (k_B T ln 2)
-    
+
     Parameters
     ----------
     D : float
@@ -341,12 +329,12 @@ def critical_power(D: float, bandwidth: float, temperature: float) -> float:
         Observation bandwidth [bits/s]
     temperature : float
         Operating temperature [K]
-    
+
     Returns
     -------
     float
         Critical power P* [W]
-    
+
     Notes
     -----
     For typical systems, P* is astronomically high, which is why
@@ -361,10 +349,12 @@ if __name__ == "__main__":
     print("=" * 50)
     table = temperature_scaling_table()
     for i in range(len(table["temperature_K"])):
-        print(f"T = {table['temperature_K'][i]:4d} K: "
-              f"İ_max = {table['I_max_bits_per_s'][i]:.2e} bits/s, "
-              f"İ×T = {table['I_max_times_T'][i]:.2e}")
-    
+        print(
+            f"T = {table['temperature_K'][i]:4d} K: "
+            f"İ_max = {table['I_max_bits_per_s'][i]:.2e} bits/s, "
+            f"İ×T = {table['I_max_times_T'][i]:.2e}"
+        )
+
     print("\nReal Systems Analysis (Table II)")
     print("=" * 50)
     systems = real_systems_table()
