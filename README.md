@@ -2,9 +2,11 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![CI](https://github.com/viridis-llc/intelligence-bound/actions/workflows/ci.yml/badge.svg)](https://github.com/viridis-llc/intelligence-bound/actions/workflows/ci.yml)
+[![CI](https://github.com/jdhart81/viridis-llc-intelligence-bound/actions/workflows/ci.yml/badge.svg)](https://github.com/jdhart81/viridis-llc-intelligence-bound/actions/workflows/ci.yml)
 
 **Thermodynamic Limits on Learning Rate and Implications for Biosphere Information**
+
+> Machine-checked proofs of these results are in [intelligence-bound-lean](https://github.com/jdhart81/intelligence-bound-lean). Active development continues in [Viridis Canon](https://github.com/jdhart81/viridis-canon), the Lean 4 research spine of the Viridis program.
 
 This repository contains the computational validation code and supplementary materials for "The Intelligence Bound" by Justin Hart (Viridis LLC).
 
@@ -59,8 +61,8 @@ intelligence-bound/
 
 ```bash
 # Clone the repository
-git clone https://github.com/viridis-llc/intelligence-bound.git
-cd intelligence-bound
+git clone https://github.com/jdhart81/viridis-llc-intelligence-bound.git
+cd viridis-llc-intelligence-bound
 
 # Create virtual environment (recommended)
 python -m venv venv
