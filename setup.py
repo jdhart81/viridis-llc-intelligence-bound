@@ -20,7 +20,7 @@ setup(
     description="Thermodynamic limits on learning rate and biosphere information",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/viridis-llc/intelligence-bound",
+    url="https://github.com/jdhart81/viridis-llc-intelligence-bound",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",

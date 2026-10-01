@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+title: "The Intelligence Bound: Validation Code"
+type: software
+authors:
+  - family-names: Hart
+    given-names: "Justin D."
+    affiliation: "Viridis LLC, Columbia Falls, Montana, USA"
+    orcid: "https://orcid.org/0009-0008-3082-2482"
+repository-code: "https://github.com/jdhart81/viridis-llc-intelligence-bound"
+abstract: "Computational validation code and supplementary materials for \"The Intelligence Bound: Thermodynamic Limits on Learning Rate and Implications for Biosphere Information\" (Hart 2025)."
+license: MIT
+version: "1.0.0"
+keywords:
+  - "Intelligence Bound"
+  - "thermodynamics"
+  - "information theory"
+  - "Landauer principle"
+  - "learning rate"
+  - "biosphere"
