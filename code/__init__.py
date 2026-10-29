@@ -9,7 +9,7 @@ Main components:
 - intelligence_bound: Core bound calculations
 - estimators: Data richness (D) estimators
 - simulations: Biodiversity impact simulations
-- validation: Reproduce all paper results
+- validation: Reproduce the paper's tables
 
 Example usage:
     from code import landauer_bound, intelligence_bound

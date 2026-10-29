@@ -3,7 +3,8 @@ Biodiversity-Intelligence Simulations
 ======================================
 
 This module implements simulations for the Gaia-Intelligence Proposition
-and Convergent Conservation Theorem.
+(a hypothesis) and the conditional-conservation model. Outcomes follow from
+the assumed D trajectories; they are model results, not empirical findings.
 
 Key simulations:
 1. Biodiversity loss impact on D (Table IV)

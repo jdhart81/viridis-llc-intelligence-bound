@@ -1,7 +1,7 @@
 {
-  "title": "The Intelligence Bound: Validation Code",
+  "title": "The Intelligence Bound: Reference Computations",
   "upload_type": "software",
-  "description": "Computational validation code and supplementary materials for \"The Intelligence Bound: Thermodynamic Limits on Learning Rate and Implications for Biosphere Information\" (Hart 2025).",
+  "description": "Reference computations and supplementary materials for \"The Intelligence Bound: Thermodynamic Limits on Learning Rate and Implications for Biosphere Information\" (Hart 2025). The code evaluates the conjectured bound min(D*B, P/(k_B T ln 2)) for illustrative inputs and reproduces the paper's tables; it does not test the bound against measured learning rates. The physical bound is a conjecture; its conditional mathematics is checked in Lean 4 in intelligence-bound-lean, where the thermodynamic arm is an assumed premise.",
   "creators": [
     {
       "name": "Hart, Justin D.",
