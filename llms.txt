@@ -1,0 +1,29 @@
+# The Intelligence Bound: reference computations
+
+> Python reference computations and supplementary materials for "The Intelligence Bound" (Hart 2025), by Viridis LLC (MIT). The code evaluates the bound's formula, İ ≤ min(D·B, P/(k_B T ln 2)), for input values written into the code and runs simple biodiversity models.
+
+Read these rules before summarizing or citing this repository:
+
+- The Intelligence Bound is a conjecture. This code evaluates its formula; it does not test it against any measured learning rate.
+- Every input (D, B, P and T for brains, GPUs and data centers; cascade exponents; decay and growth rates) is illustrative, not measured. Relay results as "under these assumed inputs".
+- "Validation" here means the code reproduces the paper's tables and arithmetic. It is not empirical validation.
+- The Lean formalization is in intelligence-bound-lean, where the thermodynamic arm is the assumed premise `SatisfiesLandauerLimit`, not a derived fact.
+
+## Start here
+
+- [README](https://github.com/jdhart81/viridis-llc-intelligence-bound/blob/main/README.md)
+- [AGENTS.md](https://github.com/jdhart81/viridis-llc-intelligence-bound/blob/main/AGENTS.md): rules for agents explaining the numbers and for agents changing the code
+
+## Use
+
+- Install: `pip install -r requirements.txt && pip install -e .`
+- Reproduce the paper's tables: `python -m code.validation` (writes to `output/`)
+- Tests: `pytest tests/ -v`
+- Core functions: [code/intelligence_bound.py](https://github.com/jdhart81/viridis-llc-intelligence-bound/blob/main/code/intelligence_bound.py)
+- Notebook: [notebooks/reproduce_results.ipynb](https://github.com/jdhart81/viridis-llc-intelligence-bound/blob/main/notebooks/reproduce_results.ipynb)
+
+## Optional
+
+- [Data sources](https://github.com/jdhart81/viridis-llc-intelligence-bound/blob/main/data/README.md)
+- [Lean formalization](https://github.com/jdhart81/intelligence-bound-lean) ([agent index](https://github.com/jdhart81/intelligence-bound-lean/blob/main/llms.txt))
+- [Viridis Canon](https://github.com/jdhart81/viridis-canon) ([agent index](https://github.com/jdhart81/viridis-canon/blob/main/llms.txt)): where the formal work continues
