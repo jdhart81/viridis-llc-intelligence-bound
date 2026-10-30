@@ -50,8 +50,8 @@ This directory contains data sources and documentation for numerical estimates u
 ### NVIDIA H100
 - **TDP**: 700 W
 - **Operating temperature**: ~350 K (77°C typical)
-- **HBM3 bandwidth**: 3.35 TB/s = 2.68 × 10¹³ bits/s
-- **Estimated D for internet text**: 0.05
+- **HBM3 bandwidth**: 3.35 TB/s = 2.68 × 10¹³ bits/s (datasheet); the code uses 3 TB/s = 2.4 × 10¹³ bits/s
+- **Estimated D (text as a channel for physical-world prediction)**: 0.03
 - **Source**: NVIDIA H100 Tensor Core GPU Datasheet
 
 ## Biodiversity-D Coupling Model

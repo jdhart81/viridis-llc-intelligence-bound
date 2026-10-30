@@ -124,8 +124,8 @@ analysis = system_analysis(
     name="NVIDIA H100",
     power=700,           # Watts
     temperature=350,     # Kelvin
-    bandwidth=3e12,      # bits/s (HBM3)
-    D=0.05              # Internet text data richness
+    bandwidth=2.4e13,    # bits/s (3 TB/s = 3e12 bytes/s = 2.4e13 bits/s)
+    D=0.03              # D_text→world (text as channel for physical-world prediction)
 )
 print(analysis)
 ```
