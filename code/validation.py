@@ -209,7 +209,7 @@ def validate_critical_power():
     print(f"\nH100 power: {P_h100} W")
     print(f"P_H100/P* = {ratio:.2e}")
     print(f"\nH100 operates {ratio:.0e}× above critical power")
-    print("This confirms the system is deeply in the DATA-limited regime")
+    print("Under these illustrative inputs, the data term is the binding bound")
 
     return ratio > 1e10
 
@@ -340,7 +340,8 @@ def run_all_validations():
 
     if passed == total:
         print("\n✓ ALL VALIDATIONS PASSED")
-        print("\nThe computational results reproduce all claims in the paper.")
+        print("\nThe code reproduces the paper's tables from its stated inputs.")
+        print("This is not an empirical test of the Intelligence Bound.")
     else:
         print(f"\n✗ {total - passed} VALIDATION(S) FAILED")
 

@@ -6,13 +6,31 @@
 
 **Thermodynamic Limits on Learning Rate and Implications for Biosphere Information**
 
-> Machine-checked proofs of these results are in [intelligence-bound-lean](https://github.com/jdhart81/intelligence-bound-lean). Active development continues in [Viridis Canon](https://github.com/jdhart81/viridis-canon), the Lean 4 research spine of the Viridis program.
+> **Status: the Intelligence Bound is a conjecture. This code evaluates its formula; it does not test it.**
+>
+> - **What the code does:** it computes P/(k_B T ln 2), D·B and their minimum for
+>   input values written into the code (brain, H100, a 1 MW data center), and runs
+>   simple models of how D might change under biodiversity loss or different
+>   strategies. The "validation" checks confirm that the code reproduces the paper's
+>   tables and arithmetic. They do not compare the bound with any measured learning
+>   rate.
+> - **Assumed:** the bound itself, and every input value (D, B, P, T for each system,
+>   the cascade exponent, decay and growth rates). These are illustrative, not
+>   measured.
+> - **Machine-checked elsewhere:** [intelligence-bound-lean](https://github.com/jdhart81/intelligence-bound-lean)
+>   checks the conditional mathematics in Lean 4. The thermodynamic arm there is the
+>   assumed premise `SatisfiesLandauerLimit` (P ≥ İ · k_B T ln 2), not a derived
+>   fact. Landauer's principle prices erasing a bit, not acquiring one, so the
+>   thermodynamic arm applies only to a learner that must erase at least as fast as
+>   it learns.
+>
+> Active development continues in [Viridis Canon](https://github.com/jdhart81/viridis-canon), the Lean 4 research spine of the Viridis program.
 
-This repository contains the computational validation code and supplementary materials for "The Intelligence Bound" by Justin Hart (Viridis LLC).
+This repository contains reference computations and supplementary materials for "The Intelligence Bound" by Justin Hart (Viridis LLC).
 
 ## Abstract
 
-We derive a fundamental upper bound on the rate at which any physical system can create intelligence:
+We propose an upper bound on the rate at which a physical system can create intelligence (the Intelligence Bound conjecture):
 
 $$\dot{I} \leq \min\left(D \cdot B, \frac{P}{k_B T \ln 2}\right)$$
 
@@ -25,11 +43,11 @@ where:
 
 ### Key Results
 
-1. **The Intelligence Bound**: All current systems (brains, GPUs) operate 10¹²–10¹⁵× below the thermodynamic ceiling. Data quality, not compute, is the bottleneck.
+1. **The Intelligence Bound (conjecture)**: Under the illustrative inputs in Table II, the Landauer term P/(k_B T ln 2) exceeds the data term D·B by about 3×10¹¹ to 7×10¹⁵ (H100 2.9×10¹¹, 1 MW data center 7.0×10¹¹, human brain 6.7×10¹⁵). If the bound holds, data quality rather than power is the binding term for these systems. This compares two upper bounds; it is not a measurement of how fast any system learns.
 
-2. **Gaia-Intelligence Proposition**: Earth's biosphere (~10¹⁵ bits of genetic information) constitutes the highest-D information source available to terrestrial intelligence.
+2. **Gaia-Intelligence Proposition (hypothesis)**: Earth's biosphere (~10¹⁵ bits of genetic information, an order-of-magnitude estimate) is proposed as the highest-D information source available to terrestrial intelligence. D has not been measured for the biosphere or for text corpora, so this is untested.
 
-3. **Convergent Conservation Theorem**: Any sufficiently advanced AI system optimizing long-term learning rate must preserve biosphere data richness as an instrumental goal—not from ethical programming but from information-theoretic necessity.
+3. **Conditional conservation (model result)**: In a model where preservation keeps D constant and exploitation makes it decay exponentially, cumulative learning from preservation eventually exceeds exploitation. The Lean version (`conditional_conservation`) proves that a linear function eventually exceeds a bounded one. Whether advanced AI systems would preserve the biosphere depends on whether real systems match the model; that is a hypothesis, not a theorem.
 
 ## Repository Structure
 
@@ -45,14 +63,14 @@ intelligence-bound/
 │   ├── intelligence_bound.py         # Core computations
 │   ├── estimators.py                 # D estimators
 │   ├── simulations.py                # Biodiversity simulations
-│   └── validation.py                 # Reproduce all paper results
+│   └── validation.py                 # Reproduce the paper's tables
 ├── tests/
 │   ├── test_bounds.py                # Unit tests
 │   ├── test_estimators.py
 │   └── test_simulations.py
 ├── data/
 │   └── README.md                     # Data sources documentation
-├── output/                   # Generated validation results
+├── output/                   # Generated tables
 └── notebooks/
     └── reproduce_results.ipynb       # Interactive reproduction
 ```
@@ -77,13 +95,15 @@ pip install -e .
 
 ## Quick Start
 
-### Reproduce All Paper Results
+### Reproduce the Paper's Tables
 
 ```bash
 python -m code.validation
 ```
 
-This will generate all tables from the paper and save them to `output/`.
+This regenerates Tables I, II, IV and V and saves them to `output/`. Each check
+confirms that the code reproduces a number or ordering stated in the paper from
+the paper's own inputs. None of them is an empirical test of the bound.
 
 ### Python API
 
@@ -174,7 +194,7 @@ pytest tests/test_bounds.py -v
 
 ## Falsifiable Predictions
 
-The paper makes several testable predictions:
+If the conjecture is right, these should hold. None has been tested yet:
 
 | Prediction | Test Method | Status |
 |------------|-------------|--------|
@@ -189,13 +209,13 @@ The paper makes several testable predictions:
 If you use this work, please cite:
 
 ```bibtex
-@article{hart2025intelligence,
-  title={The Intelligence Bound: Thermodynamic Limits on Learning Rate 
+@misc{hart2025intelligence,
+  title={The Intelligence Bound: Thermodynamic Limits on Learning Rate
          and Implications for Biosphere Information},
-  author={Hart, Justin},
-  journal={arXiv preprint},
+  author={Hart, Justin D.},
   year={2025},
-  note={Viridis LLC}
+  doi={10.5281/zenodo.23141592},
+  note={Viridis LLC. The physical bound is stated as a conjecture.}
 }
 ```
 
@@ -219,4 +239,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) for deta
 
 ## Acknowledgments
 
-Computational validation code reproducing all numerical results is provided in this repository. Run `python -m code.validation` to reproduce all tables and verify the mathematical claims.
+Code reproducing the paper's numerical tables is provided in this repository. Run `python -m code.validation` to regenerate them. The tables follow from the bound's formula and the stated inputs; the conditional mathematics is checked in Lean in [intelligence-bound-lean](https://github.com/jdhart81/intelligence-bound-lean).

@@ -2,7 +2,8 @@
 Intelligence Bound: Core Computations
 =====================================
 
-This module implements the Intelligence Bound theorem:
+This module evaluates the Intelligence Bound, which is a conjecture (the
+Lean formalization assumes its thermodynamic arm as a premise):
 
     İ ≤ min(D · B, P / (k_B T ln 2))
 
@@ -142,7 +143,8 @@ def intelligence_bound(
     D: float, bandwidth: float, power: float, temperature: float
 ) -> Tuple[float, str]:
     """
-    Calculate the Intelligence Bound (Theorem 1).
+    Evaluate the conjectured Intelligence Bound (Theorem 1 of the paper,
+    conditional on the Landauer premise).
 
     The Intelligence Bound is the minimum of the data bound and Landauer bound:
 
