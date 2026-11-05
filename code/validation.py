@@ -191,8 +191,8 @@ def validate_critical_power():
     print_header("PHASE TRANSITION: Critical Power P*")
 
     # For H100-like system
-    D = 0.05
-    B = 3e12  # bits/s
+    D = 0.03  # D_text→world, as in Table II
+    B = 2.4e13  # bits/s (3 TB/s = 3e12 bytes/s = 2.4e13 bits/s)
     T = 350  # K
 
     P_star = critical_power(D, B, T)
@@ -282,7 +282,7 @@ def validate_appendix_calculations():
 
     # A.3: H100
     print("\nA.3 NVIDIA H100 Analysis:")
-    h100 = system_analysis("H100", power=700, temperature=350, bandwidth=3e12, D=0.05)
+    h100 = system_analysis("H100", power=700, temperature=350, bandwidth=2.4e13, D=0.03)
     print(f"    Landauer bound: {h100.landauer_bound:.2e} bits/s")
     print(f"    Data bound: {h100.data_bound:.2e} bits/s")
     print(f"    Headroom: {h100.headroom:.0e}×")
